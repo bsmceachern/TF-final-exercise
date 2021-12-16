@@ -154,5 +154,5 @@ resource "aws_instance" "bkr_ec2_db" {
     tags = {
         Name = "bkr_ec2_db"
     }
-    #user_data = "${file("fe.sh")}"
+    user_data = "${file("db.sh")}"
 }
