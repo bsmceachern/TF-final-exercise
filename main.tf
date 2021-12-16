@@ -115,3 +115,31 @@ resource "aws_subnet" "bkr-backend" {
         Name = "bkr-backend"
     }
 }
+
+#create a private database security group 
+resource "aws_security_group" "bkr_private_db_access" {
+    name = "bkr_private_db_access"
+    vpc_id = aws_vpc.BKR-VPC.id
+
+    ingress {
+        from_port = 22
+        to_port = 22
+        protocol = "tcp"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+    ingress {
+        from_port = 27017
+        to_port = 27017
+        protocol = "tcp"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+    ingress {
+        from_port = 5000
+        to_port = 5000
+        protocol = "tcp"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+    tags = {
+        Name = "bkr_private_db_access"
+    }
+}
