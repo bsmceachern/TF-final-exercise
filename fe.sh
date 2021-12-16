@@ -11,7 +11,7 @@ git clone https://github.com/gSchool/sf-t4-pomotodo-fe.git
 cd sf-t4-pomotodo-fe
 npm install
 
-echo -e "REACT_APP_API_URL=http://10.0.2.105:5000"
+echo -e "REACT_APP_API_URL=http://10.0.2.111:5000"
 
 npm run build
 

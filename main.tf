@@ -199,7 +199,7 @@ resource "aws_instance" "bkr_ec2_be" {
     vpc_security_group_ids = [aws_security_group.bkr_private_be_access.id]
     key_name = "bkr_key"
     tags = {
-        Name = "bkr_ec2_db"
+        Name = "bkr_ec2_be"
     }
     user_data = "${file("be.sh")}"
 }

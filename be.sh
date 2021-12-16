@@ -10,6 +10,6 @@ git clone https://github.com/gSchool/sf-t4-demo-pomotodo-be.git
 cd sf-t4-demo-pomotodo-be
 npm install
 
-echo -e "PORT=5000\nmongoURI=mongodb://10.0.2.181:27017" > .env
+echo -e "PORT=5000\nmongoURI=mongodb://10.0.2.185:27017" > .env
 
 npm run start

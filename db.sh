@@ -11,4 +11,3 @@ sed -i $'30i \ \ bindIpAll: true' /etc/mongod.conf
 sudo systemctl start mongod
 
 sudo systemctl enable mongod
-
