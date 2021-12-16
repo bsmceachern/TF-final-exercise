@@ -31,3 +31,11 @@ resource "aws_subnet" "BKR-frontend" {
     }
 }
 
+#Gateway
+resource "aws_internet_gateway" "bkr-gateway" {
+    vpc_id = aws_vpc.BKR-VPC.id
+
+    tags = {
+        Name = "bkr-igw"
+    }
+}
