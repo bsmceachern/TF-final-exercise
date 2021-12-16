@@ -1,5 +1,7 @@
 # Local .terraform directories
 **/.terraform/*
+bkr_key
+bkr_key.pub
 
 # .tfstate files
 *.tfstate
