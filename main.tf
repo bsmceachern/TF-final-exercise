@@ -39,3 +39,17 @@ resource "aws_internet_gateway" "bkr-gateway" {
         Name = "bkr-igw"
     }
 }
+
+#Route table
+resource "aws_route_table" "bkr-route-table-public" {
+    vpc_id = aws_vpc.BKR-VPC.id
+
+    route {
+        cidr_block = "0.0.0.0/0"
+        gateway_id = aws_internet_gateway.bkr-gateway.id
+    }
+
+    tags = {
+        Name = "bkr-route-table-public"
+    }
+}
