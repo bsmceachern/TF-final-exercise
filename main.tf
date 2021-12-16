@@ -143,3 +143,16 @@ resource "aws_security_group" "bkr_private_db_access" {
         Name = "bkr_private_db_access"
     }
 }
+
+#create an EC2 instance for database
+resource "aws_instance" "bkr_ec2_db" {
+    ami = "ami-0ed9277fb7eb570c9"
+    instance_type = "t2.micro"
+    subnet_id = aws_subnet.bkr-backend.id
+    vpc_security_group_ids = [aws_security_group.bkr_private_db_access.id]
+    key_name = "bkr_key"
+    tags = {
+        Name = "bkr_ec2_db"
+    }
+    #user_data = "${file("fe.sh")}"
+}
