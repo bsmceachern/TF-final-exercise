@@ -53,3 +53,9 @@ resource "aws_route_table" "bkr-route-table-public" {
         Name = "bkr-route-table-public"
     }
 }
+
+#route table to public subnet assoc
+resource "aws_route_table_association" "rt-to-public-subnet" {
+    subnet_id = aws_subnet.BKR-frontend.id
+    route_table_id = aws_route_table.bkr-route-table-public.id
+}
