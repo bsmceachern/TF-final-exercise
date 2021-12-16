@@ -83,6 +83,12 @@ resource "aws_security_group" "bkr_public_access" {
         protocol = "tcp"
         cidr_blocks = ["0.0.0.0/0"]
     }
+    egress {
+        from_port = 0
+        to_port = 0
+        protocol = "-1"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
     tags = {
         Name = "bkr_public_access"
     }
@@ -104,7 +110,7 @@ resource "aws_instance" "bkr_ec2_fe" {
     tags = {
         Name = "bkr_ec2_fe"
     }
-    #user_data = "${file("fe.sh")}"
+    user_data = "${file("fe.sh")}"
 }
 
 #create private subnet
@@ -137,6 +143,12 @@ resource "aws_security_group" "bkr_private_db_access" {
         from_port = 5000
         to_port = 5000
         protocol = "tcp"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+    egress {
+        from_port = 0
+        to_port = 00
+        protocol = "-1"
         cidr_blocks = ["0.0.0.0/0"]
     }
     tags = {
