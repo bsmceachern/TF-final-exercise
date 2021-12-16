@@ -104,5 +104,5 @@ resource "aws_instance" "bkr_ec2_fe" {
     tags = {
         Name = "bkr_ec2_fe"
     }
-    #user_data = "${file("install.sh")}"
+    #user_data = "${file("fe.sh")}"
 }
