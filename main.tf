@@ -59,3 +59,32 @@ resource "aws_route_table_association" "rt-to-public-subnet" {
     subnet_id = aws_subnet.BKR-frontend.id
     route_table_id = aws_route_table.bkr-route-table-public.id
 }
+
+#create a public security group 
+resource "aws_security_group" "bkr_public_access" {
+    name = "bkr_public_access"
+    vpc_id = aws_vpc.BKR-VPC.id
+
+    ingress {
+        from_port = 22
+        to_port = 22
+        protocol = "tcp"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+    ingress {
+        from_port = 80
+        to_port = 80
+        protocol = "tcp"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+    ingress {
+        from_port = 5000
+        to_port = 5000
+        protocol = "tcp"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+    tags = {
+        Name = "bkr_public_access"
+    }
+}
+
