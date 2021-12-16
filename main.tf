@@ -106,3 +106,12 @@ resource "aws_instance" "bkr_ec2_fe" {
     }
     #user_data = "${file("fe.sh")}"
 }
+
+#create private subnet
+resource "aws_subnet" "bkr-backend" {
+    vpc_id = aws_vpc.BKR-VPC.id
+    cidr_block = "10.0.2.0/24"
+        tags = {
+        Name = "bkr-backend"
+    }
+}
