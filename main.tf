@@ -91,7 +91,7 @@ resource "aws_security_group" "bkr_public_access" {
 #create our key
 resource "aws_key_pair" "key" {
     key_name = "bkr_key"
-    public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDRRO2PdrjgGPeMyH/K7nje744UDuFyUJdzWTuOWWAsi0XD37yP/OHc5e+WY/MfvtxGNIXin/cwPmL1KdMvdOfnW2+55Hya1Fb2lfNgAEdoBnZlPWE195pdtH/wz9rG4ggqKYJVPTGy+xGFX65PLJVFuYuUrGs37/URK4i5TI+8U6q+UX0GQOjGItjzTLdoTRvLfXhNny/bWRbQiAYoN8JPMttKzTnUkyjvrnHc3hOv/3qKj/y9afCZD6lXjVRm22Lm4mtDJG8ucEtAiXY6MK4IrIsgRzC7xupVy7nNg8N5jrtl6viMFC45n4XAIqofugg5xp7Q9jp7BxzaUMlBo5u59Rv6TAOnMh8oa30FPMac5JwyWhNGlZgrnfPfzAsEcG8rlMLAS54EdPUU1msojKQ7cHuunJxXOqox4OcDAtDKoeE/4JqZ8EemChd7xNgYZMRUfLofsTMB5Ne4L5Re8Rmklu/eIIDrty9/a1MV+ck60gwNSJ+ZdWH+QPViPh3YEJU= bkr_key"      
+    public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDnYILW1BGsbrBXfbHbxdY16afPbQJl1djmCGi1xmGTOWzaV5OWWAL9FaqxiNS9oRKTNr4OsPVJA/0txXkhj1SNT/4ahToTso07LFRrJRmOt4siiBPYMq5wdL1wlKoUtuMfhLUNYtYfoQ8o/VNEwXi4sqk7MxSXPDYbwrWH17ikdU7uv6W0wBeHH7dkKhNfyngppGnhr8LHJkDv41ET1xp2yfe7wN8pbDNMgnfFZBGT9PcYafcR+3rHYy6YCpt7nROWvj3UrX53FivRmgdgWkqMulYZEeElTKC6C+HFCBlgISh7W2DuDAC8xHYzW2KonQu4X5OLPlxP2/3kkmeB9FkFO9bVQq5WVm9BA4PU4dlS6l1vTK3h+g6GT66LjQ7s1dbTrujvM6j2pSdRrEDsjdSwP1yNaapN3ukRT+YZjyOAKU4vBwlTop5vIG9QMFeSj8BnVQcGX1OycVCmrHUEuT+htQ6C2VoD4C/nuYa8+YvTmT4KkNDbN1sJrhrkh4wIzzU= bkr_key"      
 }
 
 #create an EC2 instance for front end
@@ -156,3 +156,53 @@ resource "aws_instance" "bkr_ec2_db" {
     }
     user_data = "${file("db.sh")}"
 }
+
+#create a backend security group 
+resource "aws_security_group" "bkr_private_be_access" {
+    name = "bkr_private_be_access"
+    vpc_id = aws_vpc.BKR-VPC.id
+
+    ingress {
+        from_port = 22
+        to_port = 22
+        protocol = "tcp"
+        cidr_blocks = ["10.0.1.0/24"]
+    }
+    ingress {
+        from_port = 5000
+        to_port = 5000
+        protocol = "tcp"
+        cidr_blocks = ["10.0.1.0/24"]
+    }
+    ingress {
+        from_port = 27017
+        to_port = 27017
+        protocol = "tcp"
+        cidr_blocks = ["10.0.2.0/24"]
+    }
+    egress {
+        from_port = 0
+        to_port = 0
+        protocol = "-1"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+    tags = {
+        Name = "bkr_private_be_access"
+    }
+}
+
+#create an EC2 instance for backend
+resource "aws_instance" "bkr_ec2_be" {
+    ami = "ami-0ed9277fb7eb570c9"
+    instance_type = "t2.micro"
+    subnet_id = aws_subnet.bkr-backend.id
+    vpc_security_group_ids = [aws_security_group.bkr_private_be_access.id]
+    key_name = "bkr_key"
+    tags = {
+        Name = "bkr_ec2_db"
+    }
+    user_data = "${file("be.sh")}"
+}
+
+
+
