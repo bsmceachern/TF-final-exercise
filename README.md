@@ -32,7 +32,9 @@ Our decision making process
          6. bash script to install necessary software/git clone for backend service<br />
 
 
-Randall  
+Randall
+1. things learned - in is for in e is for out, you can create a pair key resource, shell script: echo, sed
+2. what to do if we had more time - get the shell script working and do some testing
 
 Kayla  
 1. things learned - importance and difference of ingress/egress for route tables, scripting can be beneficial and also harder, checking shell script steps manually along the way might be helpful in resolving smaller problems more quickly
