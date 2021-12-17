@@ -35,8 +35,8 @@ Our decision making process
 Randall  
 
 Kayla  
-1. things learned - importance and difference of ingress/egress for route tables
-2. what to do if we had more time - 
+1. things learned - importance and difference of ingress/egress for route tables, scripting can be beneficial and also harder, checking shell script steps manually along the way might be helpful in resolving smaller problems more quickly
+2. what to do if we had more time - figure out why our shell scripting doesn't seem to be working properly
 
 
 Branden  
