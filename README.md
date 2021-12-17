@@ -31,6 +31,7 @@ Our decision making process
          5. EC2 instance - backend service - we decided to make the database first, service second to make configuring the backend easier (needs db connection)<br />
          6. bash script to install necessary software/git clone for backend service<br />
 
+Architecture -> https://github.com/bsmceachern/TF-final-exercise/blob/main/bkr_arch.PNG
 
 Randall
 1. things learned - in is for in e is for out, you can create a pair key resource, shell script: echo, sed
