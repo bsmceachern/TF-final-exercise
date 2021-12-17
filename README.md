@@ -13,16 +13,16 @@ Our decision making process
    
 3. main.tf steps - order of resources
     a. architecture
-         i. tried to follow a similar setup as the first image that was shown in the checkpoint page in Learn, so we could have a visual aide to help our work
+         1. tried to follow a similar setup as the first image that was shown in the checkpoint page in Learn, so we could have a visual aide to help our work
     b. steps
        Front end
-         i. VPC
-        ii. public subnet
-       iii. public subnet security group
-        iv. route table
-         v. route table > public subnet association
-        vi. EC2 instance for front end app
-       vii. bash script to install/update/clone front end project - the execution of this script is commented out while we worked on backend/db because it implies the connection               can be made from front end to backend, which we did 2nd
+         1. VPC
+         2. public subnet
+         3. public subnet security group
+         4. route table
+         5. route table > public subnet association
+         6. EC2 instance for front end app
+         7. bash script to install/update/clone front end project - the execution of this script is commented out while we worked on backend/db because it implies the connection               can be made from front end to backend, which we did 2nd
        
        Back end
          i. private subnet
